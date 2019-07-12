@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tooltip</title>
+</head>
+<style>
+  .poem {
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+    font-size: 20px;
+    color: #3d3d3d;
+  }
+  .tooltip {
+    position: relative;
+    color: #7d5fff;
+  }
+  .tooltip::before {
+    display: block;
+    position: absolute;
+    width: 150px;
+    padding: 0.5em;
+    bottom: 120%;
+    left: 50%;
+    transition: 
+    content: attr(data-tip);
+  }
+</style>
+<body>
+  <p class="poem">
+    昼短<span class="tooltip" data-tip="痛苦难熬的夜晚">苦夜</span>
+    长，何不<span class="tooltip" data-tip="一起夜晚游戏">秉夜</span>游
+  </p>
+</body>
+</html>
