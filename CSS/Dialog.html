@@ -1,62 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Dialog</title>
-</head>
-<!-- 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dialog</title>
+  </head>
+  <!-- 
   * 1. 通过 a 标签描点定位元素，href 和 id 一致来模拟点击。
   * 2. 通过添加 :target 伪类选择器来定位模态框外层元素，控制实现显示/隐藏。
  -->
-<style>
-  .dialog-button_open {
-    display: block;
-    width: 200px;
-    margin: 30px auto;
-    padding: 30px;
-    text-align: center;
-    text-decoration: none;
-    color: #ffffff;
-    background-color: #ffaf40;
-  }
-  .dialog-wrapper {
-    visibility: hidden;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  .dialog-wrapper:target {
-    visibility: visible;
-  }
-  .dialog-content {
-    position: relative;
-    width: 400px;
-    margin: 10px auto;
-    padding: 100px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #cd84f1;
-  }
-  .dialog-button_close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    text-decoration: none;
-    color: #ffffff;
-  }
-</style>
-<body>
-  <a href="#dialog" class="dialog-button_open">点击弹出模态框</a>
-  <div class="dialog-wrapper" id="dialog">
-    <div class="dialog-content">
-      <a href="#" class="dialog-button_close">X</a>
-      这是模态框的内容。
+  <style>
+    .dialog-button_open {
+      display: block;
+      width: 200px;
+      margin: 30px auto;
+      padding: 30px;
+      text-align: center;
+      text-decoration: none;
+      color: #ffffff;
+      background-color: #ffaf40;
+    }
+    .dialog-wrapper {
+      visibility: hidden;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    .dialog-wrapper:target {
+      visibility: visible;
+    }
+    .dialog-content {
+      position: relative;
+      width: 400px;
+      margin: 10px auto;
+      padding: 100px;
+      text-align: center;
+      color: #ffffff;
+      background-color: #cd84f1;
+    }
+    .dialog-button_close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      text-decoration: none;
+      color: #ffffff;
+    }
+  </style>
+  <body>
+    <a href="#dialog" class="dialog-button_open">点击弹出模态框</a>
+    <div class="dialog-wrapper" id="dialog">
+      <div class="dialog-content">
+        <a href="#" class="dialog-button_close">X</a>
+        这是模态框的内容。
+      </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>

@@ -1,53 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ImgPreview</title>
-</head>
-<!-- 
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>ImgPreview</title>
+  </head>
+  <!-- 
   * 1. 通过 a 标签描点定位元素，href 和 id一致模拟点击。
   * 2. 通过添加伪类 :target 选择器来控制大图的显示/隐藏。
  -->
-<style>
-  .wrapper {
-    width: 250px;
-    margin: 30px auto;
-  }
-  .img-box {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 1);
-    z-index: 999;
-  }
-  .img-box:target {
-    display: block;
-  }
-  .img-box img {
-    margin-top: 100px;
-  }
-</style>
-<body>
-  <div class="wrapper">
-    <a href="#img-pre_first">
-      <img src="https://si.geilicdn.com/img-5cea0000016b6d86be730a217252-unadjust_900_383.png?w=100&h=100" alt="">
-    </a>
-    <a href="#img-pre_second">
-      <img src="https://si.geilicdn.com/img-46400000016b6d8e530a0a21924b-unadjust_900_383.png?w=100&h=100" alt="">
-    </a>
+  <style>
+    .wrapper {
+      width: 250px;
+      margin: 30px auto;
+    }
+    .img-box {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 1);
+      z-index: 999;
+    }
+    .img-box:target {
+      display: block;
+    }
+    .img-box img {
+      margin-top: 100px;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <a href="#img-pre_first">
+        <img
+          src="https://si.geilicdn.com/img-5cea0000016b6d86be730a217252-unadjust_900_383.png?w=100&h=100"
+          alt=""
+        />
+      </a>
+      <a href="#img-pre_second">
+        <img
+          src="https://si.geilicdn.com/img-46400000016b6d8e530a0a21924b-unadjust_900_383.png?w=100&h=100"
+          alt=""
+        />
+      </a>
 
-    <a href="#" id="img-pre_first" class="img-box">
-      <img src="https://si.geilicdn.com/img-5cea0000016b6d86be730a217252-unadjust_900_383.png" alt="">
-    </a>
-    <a href="#" id="img-pre_second" class="img-box">
-      <img src="https://si.geilicdn.com/img-46400000016b6d8e530a0a21924b-unadjust_900_383.png" alt="">
-    </a>
-  </div>
-</body>
+      <a href="#" id="img-pre_first" class="img-box">
+        <img
+          src="https://si.geilicdn.com/img-5cea0000016b6d86be730a217252-unadjust_900_383.png"
+          alt=""
+        />
+      </a>
+      <a href="#" id="img-pre_second" class="img-box">
+        <img
+          src="https://si.geilicdn.com/img-46400000016b6d8e530a0a21924b-unadjust_900_383.png"
+          alt=""
+        />
+      </a>
+    </div>
+  </body>
 </html>
