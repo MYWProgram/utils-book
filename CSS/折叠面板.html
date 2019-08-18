@@ -5,41 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Collapse</title>
+    <style>
+      .collapse-wrapper {
+        width: 50%;
+        margin: 30px auto;
+        border: 1px solid red;
+      }
+      .panel-title {
+        display: block;
+        position: relative;
+        padding: 0.2em;
+        border-bottom: 1px solid #ffffff;
+        color: #ffffff;
+        background-color: orange;
+        cursor: pointer;
+      }
+      .checkbox-common {
+        position: absolute;
+      }
+      #checkbox-first:checked ~ #content-first,
+      #checkbox-second:checked ~ #content-second,
+      #checkbox-third:checked ~ #content-third {
+        height: 100px;
+      }
+      .panel-content {
+        height: 0;
+        transition: all 300ms;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <!-- 
   * 1. 利用 checkbox 的多选特性，实现同时事件聚焦。
   * 2. 利用 checkbox 的可聚焦性，模拟点击事件。
   * 3. 通过 CSS 派生选择器来实现内容区域的高度变换从而实现折叠效果。
- -->
-  <style>
-    .collapse-wrapper {
-      width: 50%;
-      margin: 30px auto;
-      border: 1px solid red;
-    }
-    .panel-title {
-      display: block;
-      position: relative;
-      padding: 0.2em;
-      border-bottom: 1px solid #ffffff;
-      color: #ffffff;
-      background-color: orange;
-      cursor: pointer;
-    }
-    .checkbox-common {
-      position: absolute;
-    }
-    #checkbox-first:checked ~ #content-first,
-    #checkbox-second:checked ~ #content-second,
-    #checkbox-third:checked ~ #content-third {
-      height: 100px;
-    }
-    .panel-content {
-      height: 0;
-      transition: all 300ms;
-      overflow: hidden;
-    }
-  </style>
+  -->
   <body>
     <div class="collapse-wrapper">
       <input type="checkbox" id="checkbox-first" class="checkbox-common" />

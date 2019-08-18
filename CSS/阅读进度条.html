@@ -5,71 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Indicator</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+      }
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        height: 125px;
+        top: 0;
+        background-color: #ffffff;
+      }
+      main {
+        margin-top: 128px;
+      }
+      footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 125px;
+        background-color: #ffffff;
+      }
+      @supports (height: 100vh) {
+        body {
+          background: linear-gradient(to right top, #0089f2 50%, #dddddd 50%);
+          background-size: 100% calc(100% - 100vh + 129px);
+          background-repeat: no-repeat;
+        }
+        body::before {
+          position: fixed;
+          width: 100%;
+          top: 128px;
+          bottom: 0;
+          z-index: -1;
+          content: "";
+          background-color: #ffffff;
+        }
+      }
+      body {
+        font-family: "Open Sans";
+        font-size: 1.25rem;
+      }
+      main,
+      header,
+      footer {
+        padding: 0px 20px;
+        box-sizing: border-box;
+      }
+      p::before {
+        content: "\2003\2003";
+      }
+    </style>
   </head>
   <!-- 
     * 1. 给 body 设置一个对角线（to right top）的渐变背景。
     * 2. 在 body 上覆盖一个背景为白色的遮罩层，露出顶部的一条线用来显示进度。
-   -->
-  <style>
-    html,
-    body {
-      margin: 0;
-    }
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: fixed;
-      width: 100%;
-      height: 125px;
-      top: 0;
-      background-color: #ffffff;
-    }
-    main {
-      margin-top: 128px;
-    }
-    footer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 125px;
-      background-color: #ffffff;
-    }
-    @supports (height: 100vh) {
-      body {
-        background: linear-gradient(
-          to right top,
-          #0089f2 50%,
-          #dddddd 50%
-        );
-        background-size: 100% calc(100% - 100vh + 129px);
-        background-repeat: no-repeat;
-      }
-      body::before {
-        position: fixed;
-        width: 100%;
-        top: 128px;
-        bottom: 0;
-        z-index: -1;
-        content: "";
-        background-color: #ffffff;
-      }
-    }
-    body {
-      font-family: "Open Sans";
-      font-size: 1.25rem;
-    }
-    main,
-    header,
-    footer {
-      padding: 0px 20px;
-      box-sizing: border-box;
-    }
-    p::before {
-      content: "\2003\2003";
-    }
-  </style>
+  -->
   <body>
     <header>
       <h1>Scroll Indicator</h1>

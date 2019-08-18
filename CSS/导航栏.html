@@ -5,52 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Tab</title>
+    <style>
+      .tabs-wrapper {
+        margin: 30px auto;
+        width: 50%;
+        height: 100px;
+        position: relative;
+      }
+      .tab {
+        float: left;
+      }
+      input {
+        position: absolute;
+        opacity: 0;
+      }
+      label {
+        padding: 0.5em 0.5em;
+        border-radius: 3px;
+        color: #ffffff;
+        background-color: #2980b9;
+      }
+      section {
+        width: 100%;
+        height: 150px;
+        padding: 10px;
+        top: 30px;
+        left: 0;
+        position: absolute;
+        background-color: #dddddd;
+      }
+      #radio-first:checked ~ label,
+      #radio-second:checked ~ label,
+      #radio-third:checked ~ label {
+        background-color: #e67e22;
+      }
+      #radio-first:checked ~ section,
+      #radio-second:checked ~ section,
+      #radio-third:checked ~ section {
+        z-index: 1;
+      }
+    </style>
   </head>
   <!-- 
     * 1. 相同 name 属性的 radio 单选框组只能有一个处于 checked 状态，用这个特性来模拟导航栏项的单选。
     * 2. 利用 radio 的可聚焦性，模拟点击事件。
     * 3. 通过 CSS 派生选择器，对应 radio 单选框，使用 z-index 层级设置来控制内容的显示/隐藏。
    -->
-  <style>
-    .tabs-wrapper {
-      margin: 30px auto;
-      width: 50%;
-      height: 100px;
-      position: relative;
-    }
-    .tab {
-      float: left;
-    }
-    input {
-      position: absolute;
-      opacity: 0;
-    }
-    label {
-      padding: 0.5em 0.5em;
-      border-radius: 3px;
-      color: #ffffff;
-      background-color: #2980b9;
-    }
-    section {
-      width: 100%;
-      height: 150px;
-      padding: 10px;
-      top: 30px;
-      left: 0;
-      position: absolute;
-      background-color: #dddddd;
-    }
-    #radio-first:checked ~ label,
-    #radio-second:checked ~ label,
-    #radio-third:checked ~ label {
-      background-color: #e67e22;
-    }
-    #radio-first:checked ~ section,
-    #radio-second:checked ~ section,
-    #radio-third:checked ~ section {
-      z-index: 1;
-    }
-  </style>
   <body>
     <div class="tabs-wrapper">
       <div class="tab">
