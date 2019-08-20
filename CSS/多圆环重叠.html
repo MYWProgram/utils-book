@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>多圆环重叠</title>
+    <style>
+      .wrapper {
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(2, 300px);
+        place-items: center;
+      }
+      /* 1 */
+      .circle-wrapper_demo1 {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: orange;
+        opacity: 0.42;
+      }
+      .circle-inside_demo1 {
+        width: 100px;
+        height: 100px;
+        position: relative;
+        top: 25px;
+        left: 25px;
+        border-radius: 50%;
+        background-color: lightgreen;
+      }
+      .circle-inside_demo1::after {
+        content: "";
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        border-radius: 50%;
+        background-color: blue;
+      }
+      /* 2 */
+      .circle-wrapper_demo2 {
+        width: 100px;
+        height: 100px;
+        border: 25px solid lightgreen;
+        border-radius: 50%;
+        background-color: lightcoral;
+      }
+      .circle-wrapper_demo2::after {
+        width: 50px;
+        height: 50px;
+        content: "";
+        display: block;
+        position: relative;
+        top: 25px;
+        left: 25px;
+        border-radius: 50%;
+        background-color: black;
+      }
+      /* 3 */
+      .circle-wrapper_demo3 {
+        width: 150px;
+        height: 150px;
+        box-shadow: 0 0 0 37.5px red inset;
+        border-radius: 50%;
+        background-color: skyblue;
+      }
+      /* 4 */
+      .circle-wrapper_demo4 {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        /* background: -webkit-radial-gradient(circle closest-side, lightgreen 50%, lightblue 50%); */
+        background: radial-gradient(circle closest-side, lightgreen 50%, lightblue 50%);
+      }
+    </style>
+  </head>
+  <!-- 
+  * 使用多种方式绘制圆环：
+  * 1. 标签嵌套：使用标签嵌套的方式实现，如果只有两层圆环，那么父子元素可以采用子绝父相的方式；如果有三层，最外层父元素没有 position ，中间层 relative ，内层使用伪元素添加并绝对定位（也可以直接使用伪元素完成这些操作，而不使用标签嵌套）。
+  * 2. 使用 border：通过给 border 设置 line-width ，但是要注意此时最外层的实际宽高为双倍 line-width 的值；最后再通过给元素添加伪元素，注意此时相对父元素定位。
+  * 3. 使用 box-shadow：注意其属性值
+  *    第 1 个长度值定义元素的阴影水平偏移值。正值，阴影出现在元素右侧；负值，则阴影出现在元素左侧。
+  *    第 2 个长度值定义元素的阴影垂直偏移值。正值，阴影出现在元素底部；负值，则阴影出现在元素顶部。
+  *    第 3 个长度值定义元素的阴影模糊值半径。该值越大阴影边缘越模糊，若该值为0，阴影边缘不出现模糊；不允许负值。
+  *    第 4 个长度值定义元素的阴影外延值。正值，阴影将向四面扩展；负值，则阴影向里收缩。
+  *    inset：定义元素的阴影类型为内阴影。该值为空时，则元素的阴影类型为外阴影。
+  *    因此可以使用内外阴影的两种方式。当然实现三圆环可以添加伪类。
+  * 4. 使用 radial-gradient：需要注意兼容性，不过现在基本全面支持。
+  -->
+  <body>
+    <div class="wrapper">
+      <!-- 1 -->
+      <div class="circle-wrapper_demo1">
+        <div class="circle-inside_demo1"></div>
+      </div>
+      <!-- 2 -->
+      <div class="circle-wrapper_demo2"></div>
+      <!-- 3 -->
+      <div class="circle-wrapper_demo3"></div>
+      <!-- 4 -->
+      <div class="circle-wrapper_demo4"></div>
+    </div>
+  </body>
+</html>
