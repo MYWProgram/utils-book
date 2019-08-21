@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>加载-跳动的小球</title>
+    <style>
+      .loader-ball_wrapper {
+        width: 50px;
+        border-bottom: 1px solid black;
+      }
+      .loader-ball_content {
+        margin-top: 50px;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: jump 1.5s ease-out infinite alternate;
+        background: linear-gradient(
+          to bottom,
+          #cb60b3 0%,
+          #c146a1 50%,
+          #a80077 51%,
+          #db36a4 100%
+        );
+      }
+      @keyframes jump {
+        from {
+          transform: translateY(0px) rotate(0deg) scale(1, 1);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-50px) rotate(360deg) scale(0.8, 0.8);
+          opacity: 0.8;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loader-ball_wrapper">
+        <div class="loader-ball_content"></div>
+    </div>
+  </body>
+</html>
