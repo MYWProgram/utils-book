@@ -4,18 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>加载-跳动的小球</title>
+    <title>加载动画效果</title>
     <style>
-      .loading-ball_wrapper {
-        width: 50px;
-        border-bottom: 1px solid black;
+      .loading-wrapper {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        place-items: center;
       }
+
+      /* 1. 加载 - 转动的线圈。 */
+      /* 将画布定义成 180 * 180。 */
+      .spinner {
+        margin: 10px;
+        width: 180px;
+        height: 180px;
+        /* 定义线圈动画的各种属性。 */
+        animation: rotate 2s linear infinite;
+      }
+      /* 线圈 360 度旋转。 */
+      @keyframes rotate {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      /* 线圈以及实心小圆的部分。 */
+      .spinner-dot {
+        stroke: #000000;
+        stroke-width: 1;
+        fill: #000000;
+        /* 小球动画的各种属性。 */
+        animation: skew 2s linear infinite alternate;
+      }
+      /* 小球旋转倾斜，动画更加生动。 */
+      @keyframes skew {
+        from {
+          transform: skewX(10deg);
+        }
+        to {
+          transform: skewX(40deg);
+        }
+      }
+      .spinner-border {
+        fill: transparent;
+        stroke-width: 2;
+        width: 100%;
+        height: 100%;
+      }
+      .path {
+        stroke-dasharray: 170;
+        stroke-dashoffset: 20;
+      }
+
+      /* 2. 加载 - 跳动的小球。 */
       .loading-ball_content {
-        width: 50px;
-        height: 50px;
+        width: 100px;
+        height: 100px;
         margin-top: 200px;
         border-radius: 50%;
-        background-image: linear-gradient(180deg, #cb60b3 0%, #c146a1 50%, #a80077 51%, #db36a4 100%);
+        background-image: linear-gradient(
+          180deg,
+          #cb60b3 0%,
+          #c146a1 50%,
+          #a80077 51%,
+          #db36a4 100%
+        );
         animation: jump 1.5s ease-in-out infinite alternate;
       }
       @keyframes jump {
@@ -31,7 +85,14 @@
     </style>
   </head>
   <!-- 
-    * 1. 属性 linear-gradient 控制渐变色。
+  * 一、转动的线圈。
+  * 1. 首先定义一个 66 * 66 的视口；然后定义一个半径为 31px 的圆；对线圈使用线性填充，分成 3 段，实现渐变填充的线条效果；然后添加一个小的圆圈。
+  * 2. fill: transparent; 让大圆圈的内部填充色变为透明，只留下外边的描边。
+  *    stroke-dasharray: 170; 使用点或虚线进行描边，由于长度没有超过圆的周长并且数值比较大，就看不到第二条点线或虚线。但当这个值比较小时，线圈就变成几条虚线绘制。
+  *    stroke-dashoffset: 20; 表示偏移绘制起点的距离，这个值越大，线条就越短。
+
+  * 二、跳动的小球。
+  * 1. 属性 linear-gradient 控制渐变色。
     *    属性值：第一个参数可以是角度，也可以是 to left （从右至左，270deg） | right （从左至右，90deg） | top（从下至上，0deg） | bottom（从上至下，180deg；默认值）。
     *           第二个参数是颜色加上起止位置，位置设置可以使用长度值（不能为负数），也可以是百分比。
     * 2. 定义一个名为 jump 、时间间隔 1.5s 的无限循环动画函数，先快后慢，反方向执行一遍。
@@ -63,8 +124,33 @@
     *    scale：定义对象的 2D 缩放，接收 x、y 两个轴的缩放水平，第二个参数没有时等同于第一个参数。
   -->
   <body>
-    <div class="loading-ball_wrapper">
-      <div class="loading-ball_content"></div>
+    <div class="loading-wrapper">
+      <!-- 1. 加载 - 转动的线圈。 -->
+      <div class="loading-item">
+        <svg
+          class="spinner"
+          viewBox="0 0 66 66"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle
+            class="path spinner-border"
+            cx="33"
+            cy="33"
+            r="31"
+            stroke="url(#gradient)"
+          ></circle>
+          <linearGradient id="gradient">
+            <stop offset="50%" stop-color="#000000" stop-opacity="1"></stop>
+            <stop offset="65%" stop-color="#000000" stop-opacity="0.5"></stop>
+            <stop offset="100%" stop-color="#000000" stop-opacity="0"></stop>
+          </linearGradient>
+          <circle class="path spinner-dot" cx="37" cy="3" r="2"></circle>
+        </svg>
+      </div>
+      <!-- 2. 加载 - 跳动的小球。 -->
+      <div class="loading-item">
+        <div class="loading-ball_content"></div>
+      </div>
     </div>
   </body>
 </html>
