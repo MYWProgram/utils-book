@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>flex 最后一行自适应布局</title>
+    <style>
+      /* 案例一对应 CSS 代码。 */
+      .container {
+        display: flex;
+        /* 两端对齐 */
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding: 10px;
+        margin-top: 10px;
+        outline: 1px solid red;
+      }
+      .list {
+        width: 19%;
+        height: 100px;
+        background-color: skyblue;
+        margin-top: 15px;
+      }
+      .list::after {
+        display: none;
+        float: right;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: red;
+        content: "";
+      }
+      /* 如果最后一行是4个元素 */
+      .list:last-child:nth-child(5n - 1) {
+        margin-right: calc(19% + 5% / 4);
+      }
+      /* 如果最后一行是3个元素 */
+      .list:last-child:nth-child(5n - 2) {
+        margin-right: calc(38% + 10% / 4);
+      }
+      /* 如果最后一行是2个元素 */
+      .list:last-child:nth-child(5n - 3) {
+        margin-right: calc(57% + 15% / 4);
+      }
+      .addWrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid skyblue;
+        background-color: #ffffff !important;
+      }
+      .addItem {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        background-color: gray;
+        cursor: pointer;
+      }
+
+      /* 案例二对应 CSS 代码。 */
+      .item {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+        margin: 15px 10px 0 0;
+      }
+
+      .container > i {
+        width: 100px;
+        margin-right: 10px;
+      }
+
+      /* 案例三对应 CSS 代码。 */
+      .box-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        margin-top: 10px;
+        outline: 1px solid red;
+      }
+      .box {
+        width: 24%;
+        height: 100px;
+        background-color: skyblue;
+        margin-top: 15px;
+      }
+      .box:not(:nth-child(4n)) {
+        margin-right: calc(4% / 3);
+      }
+    </style>
+  </head>
+  <!-- 
+    * 1. 第一个案例是在已知每一行 div 个数的情况下，添加或者减少任意个数的 div，保持布局的不变形。
+          * 注意使用的 CSS 属性值：CSS3 的伪类 :nth-child(n) 其中 n 可以是一个表达式或者固定的数字，用于选中一个父元素中的第几个子元素或某种子元素。
+          * :last-child 选择某父元素中最后一个子元素。
+    * 2. 如果每一行 div 的数量不确定，那么上面案例的方法就不行了。需要使用其他方法来进行补充，仔细想一下，其实也就是占位置的问题：
+          * 如果最多的一行有 7 个 div，那么相应的其他行只要用一些标签或者特殊的东西进行补充占位到 7 个就行了。
+          * 也就是说某一行最多有几个 div，就对应添加多少个占位元素。并且用于占位的元素宽度以及 margin 需要和每一项相同即可。
+    * 3. 如果每一行的 div 元素是固定的呢？那么就很简单了，使用动态 margin 来进行计算。
+          * 我们需要根据最后一个元素的位置来进行计算，他可能处于最后一行的第一、二、三...个。
+          * 那么它的 margin 值就可能是 '间隙 + 空缺的盒子个数'。
+  -->
+  <body>
+    <!-- 案例一 -->
+    <div class="container">
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list"></div>
+      <div class="list addWrapper">
+        <div class="addItem"></div>
+      </div>
+    </div>
+
+    <!-- 案例二 -->
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <!-- 案例三 -->
+    <div class="box-container">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+
+    <script>
+      // 案例一对应 JS 代码。
+      document.querySelector(".addItem").addEventListener("click", function() {
+        const newNode = document.createElement("div"),
+          referenceNode = document.querySelector(".addWrapper");
+        newNode.className = "list";
+        document
+          .querySelector(".container")
+          .insertBefore(newNode, referenceNode);
+      });
+      const listWrapper = document.querySelector(".list"),
+        deleteButton = window.getComputedStyle(listWrapper, "::after");
+      listWrapper.addEventListener("click", function() {
+        console.log(1);
+        // e.deleteButton.style = 'display: block';
+      });
+    </script>
+  </body>
+</html>
