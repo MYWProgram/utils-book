@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>JS 导航栏</title>
+    <style>
+      .nav-wrapper {
+        width: 300px;
+        height: 30px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        border-radius: 5px 5px 0px 0px;
+        background-color: skyblue;
+      }
+      .nav-content {
+        border-radius: 0px 0px 5px 5px;
+        background-color: darkcyan;
+      }
+      .nav-item {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        cursor: pointer;
+      }
+      .nav-content_show {
+        width: 300px;
+        height: 200px;
+        transition: all 0.8s;
+      }
+      .nav-content_hide {
+        width: 300px;
+        height: 0px;
+        transition: all 0.8s;
+      }
+    </style>
+  </head>
+  <!-- 
+    * 1. 注意首先要给导航内容区域添加高度为 0 的那个类，这样方便后面的 JS 判断。
+    * 2. data-* 属性取值问题，由多个 '-' 分隔的属性在 JS 操作获取时需要用驼峰命名。
+   -->
+  <body>
+    <div class="nav-wrapper">
+      <div class="nav-item" data-nav-content="新闻内容">新闻</div>
+      <div class="nav-item" data-nav-content="财经内容">财经</div>
+      <div class="nav-item" data-nav-content="体育内容">体育</div>
+      <div class="nav-item" data-nav-content="娱乐内容">娱乐</div>
+      <div class="nav-item" data-nav-content="关注内容">关注</div>
+    </div>
+    <div class="nav-content nav-content_hide">
+      <section class="nav-content_text"></section>
+    </div>
+
+    <script>
+      let navItems = document.querySelectorAll(".nav-item"),
+        navContent = document.querySelector(".nav-content"),
+        navContentText = document.querySelector(".nav-content_text");
+      for (let i = 0; i < navItems.length; i++) {
+        navItems[i].addEventListener("click", function() {
+          if (navContent.classList.contains("nav-content_hide")) {
+            navContent.classList.remove("nav-content_hide");
+            navContent.classList.add("nav-content_show");
+            navContentText.innerText = navItems[i].dataset.navContent;
+          } else {
+            navContent.classList.remove("nav-content_show");
+            navContent.classList.add("nav-content_hide");
+            setTimeout(() => {
+              navContentText.innerText = "";
+            }, 500);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

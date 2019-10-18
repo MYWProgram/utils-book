@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>flex 最后一行自适应布局</title>
+    <title>flex 最后一行左对齐</title>
     <style>
       /* 案例一对应 CSS 代码。 */
       .container {
@@ -65,7 +65,6 @@
         background-color: skyblue;
         margin: 15px 10px 0 0;
       }
-
       .container > i {
         width: 100px;
         margin-right: 10px;
@@ -88,6 +87,22 @@
       .box:not(:nth-child(4n)) {
         margin-right: calc(4% / 3);
       }
+
+      /* 案例四对应 CSS 代码。 */
+      .item-wrapper {
+        margin-top: 10px;
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: repeat(auto-fill, 100px);
+        grid-gap: 10px;
+        outline: 1px solid red;
+      }
+      .item-content {
+        width: 100px;
+        height: 100px;
+        background-color: skyblue;
+        margin-top: 5px;
+      }
     </style>
   </head>
   <!-- 
@@ -100,9 +115,10 @@
     * 3. 如果每一行的 div 元素是固定的呢？那么就很简单了，使用动态 margin 来进行计算。
           * 我们需要根据最后一个元素的位置来进行计算，他可能处于最后一行的第一、二、三...个。
           * 那么它的 margin 值就可能是 '间隙 + 空缺的盒子个数'。
+    * 4. 如果不能直接操作 HTML 结构，同时布局的列表个数也不固定，此时建议使用 Grid 布局。
   -->
   <body>
-    <!-- 案例一 -->
+    <!-- 案例一对应 HTML 代码。 -->
     <div class="container">
       <div class="list"></div>
       <div class="list"></div>
@@ -123,7 +139,7 @@
       </div>
     </div>
 
-    <!-- 案例二 -->
+    <!-- 案例二对应 HTML 代码。 -->
     <div class="container">
       <div class="item"></div>
       <div class="item"></div>
@@ -138,7 +154,7 @@
       <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
     </div>
 
-    <!-- 案例三 -->
+    <!-- 案例三对应 HTML 代码。 -->
     <div class="box-container">
       <div class="box"></div>
       <div class="box"></div>
@@ -152,6 +168,20 @@
       <div class="box"></div>
     </div>
 
+    <!-- 案例四对应 HTML 代码。-->
+    <div class="item-wrapper">
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+      <div class="item-content"></div>
+    </div>
     <script>
       // 案例一对应 JS 代码。
       document.querySelector(".addItem").addEventListener("click", function() {
