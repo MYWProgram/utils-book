@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>JS 导航栏</title>
+    <title>导航栏带抽屉过度与获取 data-*</title>
     <style>
       .nav-wrapper {
         width: 300px;
@@ -65,7 +65,9 @@
           if (navContent.classList.contains("nav-content_hide")) {
             navContent.classList.remove("nav-content_hide");
             navContent.classList.add("nav-content_show");
-            navContentText.innerText = navItems[i].dataset.navContent;
+            setTimeout(() => {
+              navContentText.innerText = navItems[i].dataset.navContent;
+            }, 100);
           } else {
             navContent.classList.remove("nav-content_show");
             navContent.classList.add("nav-content_hide");
