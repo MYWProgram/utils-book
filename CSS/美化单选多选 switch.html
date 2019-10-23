@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>使用 CSS 美化的单选、多选、switch</title>
+    <style>
+      body {
+        display: grid;
+        grid-template: 1fr / repeat(3, 1fr);
+        gap: 10px;
+        justify-items: center;
+        align-items: center;
+      }
+      /* 案例一对应 CSS 代码。 */
+      .multiple input {
+        display: none;
+      }
+      .multiple label {
+        width: 20px;
+        height: 20px;
+        position: relative;
+        display: inline-block;
+        border: 1px solid #333333;
+        cursor: pointer;
+      }
+      .multiple label::after {
+        position: absolute;
+        transition: opacity 0.5s ease;
+        opacity: 0;
+        content: "";
+      }
+      .multiple input:checked + label::after {
+        width: 20px;
+        height: 10px;
+        top: 50%;
+        left: 50%;
+        margin: -10px 0px 0px -11px;
+        transform: rotate(-45deg);
+        border: 2px solid #64bd63;
+        border-top: none;
+        border-right: none;
+        opacity: 1;
+      }
+
+      /* 案例二对应 CSS 代码。 */
+      .switch {
+        width: 52px;
+        height: 31px;
+        position: relative;
+        display: inline-block;
+        border: 1px solid #dfdfdf;
+        border-radius: 20px;
+        background-clip: content-box;
+        background-color: #fdfdfd;
+        box-shadow: #dfdfdf 0 0 0 0 inset;
+        -webkit-appearance: none;
+        user-select: none;
+        outline: none;
+        cursor: pointer;
+      }
+      .switch:before {
+        width: 29px;
+        height: 29px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        content: "";
+      }
+      .switch:checked {
+        border-color: #64bd63;
+        background-color: #64bd63;
+        box-shadow: #64bd63 0 0 0 16px inset;
+      }
+      /* 选中后小圆改变位置。 */
+      .switch:checked:before {
+        left: 21px;
+      }
+      .switch.switch-animbg {
+        transition: background-color ease 0.4s;
+      }
+      .switch.switch-animbg:before {
+        transition: left 0.3s;
+      }
+      .switch.switch-animbg:checked {
+        background-color: #64bd63;
+        box-shadow: #dfdfdf 0 0 0 0 inset;
+        transition: border-color 0.4s, background-color ease 0.4s;
+      }
+      .switch.switch-animbg:checked:before {
+        transition: left 0.3s;
+      }
+      .switch.switch-anim {
+        transition: border cubic-bezier(0, 0, 0, 1) 0.4s,
+          box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
+      }
+      .switch.switch-anim:before {
+        transition: left 0.3s;
+      }
+      .switch.switch-anim:checked {
+        box-shadow: #64bd63 0 0 0 16px inset;
+        background-color: #64bd63;
+        transition: border ease 0.4s, box-shadow ease 0.4s,
+          background-color ease 1.2s;
+      }
+      .switch.switch-anim:checked:before {
+        transition: left 0.3s;
+      }
+
+      /* 案例三对应 CSS 代码。 */
+      .single input {
+        display: none;
+      }
+      .single label {
+        width: 30px;
+        height: 30px;
+        position: relative;
+        display: inline-block;
+        border: 1px solid #333333;
+        border-radius: 50%;
+      }
+      .single label::after {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -11px 0px 0px -11px;
+        border: 1px solid #333333;
+        border-radius: 50%;
+        transition: all 0.5s ease;
+        z-index: 1;
+        cursor: pointer;
+        content: "";
+      }
+      .single input:checked + label::after {
+        background: #64bd63;
+      }
+    </style>
+  </head>
+  <!-- 
+    * 美化单选框、多选框、switch 都是首先隐藏 input 标签，然后从 label 标签入手美化样式，谨记 label 标签的 for 属性内容和 input 的 id 写为一致；这样点选 label 标签就可以点到 input 了。
+    * 1. 勾勾的样式通过伪类添加在 label 标签上，并且当选中 input 标签之后，紧邻的兄弟元素 label 的伪类部分样式才会生效；这个选中的效果使用 :checked 来实现。
+    *    注意 label 标签的伪类在未选中的情况下透明，选中的情况下不透明；也就是设置 opacity 的改变，当然也可以使用 display: none; 和 display: inline; 来实现。
+  -->
+  <body>
+    <div class="multiple">
+      <!-- 案例一对应 HTML 代码。 -->
+      <input type="checkbox" id="checkbox" />
+      <label for="checkbox"></label>
+    </div>
+    <div>
+      <!-- 案例二对应 HTML 代码。 -->
+      <input class="switch" type="checkbox" />
+      <input class="switch switch-animbg" type="checkbox" />
+      <input class="switch switch-anim" type="checkbox" />
+    </div>
+    <div class="single">
+      <!-- 案例三对应 HTML 代码。 -->
+      <input type="radio" id="radio" />
+      <label for="radio"></label>
+    </div>
+  </body>
+</html>
