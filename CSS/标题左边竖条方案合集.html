@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>左边竖条实现方式</title>
+    <style>
+      div {
+        position: relative;
+        width: 200px;
+        height: 60px;
+        margin-bottom: 5px;
+        text-align: center;
+        line-height: 60px;
+        background: #ddd;
+      }
+      /* 方案一，border 实现。 */
+      .border {
+        border-left: 5px solid deeppink;
+      }
+      /* 方案二，使用伪元素实现。 */
+      .pseudo-element::before {
+        position: absolute;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: deeppink;
+        content: '';
+      }
+      /* 方案三，box-shadow 实现；又分为外阴影和内阴影。 */
+      .box-shadow {
+        box-shadow: -5px 0px 0 0 deeppink;
+      }
+      .inset-box_shadow {
+        box-shadow: inset 5px 0px 0 0 deeppink;
+      }
+      /* 方案四，drop-shadow 实现。 */
+      .drop-shadow {
+        filter: drop-shadow(-5px 0 0 deeppink);
+      }
+      /* 方案五：渐变实现。 */
+      .linear-gradient {
+        background-image: linear-gradient(90deg, deeppink 0px, deeppink 5px, transparent 5px);
+      }
+      /* 方案六，修改滚动条。 */
+      .scroll-bar {
+        width: 205px;
+        background: deeppink;
+        overflow-y: scroll;
+      }
+      .scroll-bar::-webkit-scrollbar {
+        width: 200px;
+        background-color: #ddd;
+      }
+    </style>
+  </head>
+  <!-- 
+    * 1. 方案一：会在 div 右侧增加 5px 的区域，从而把 div 向右挤 5px ，这样就改变了 div 的实际宽度。
+    * 2. 关于这个方案，外阴影和内阴影都不会改变 div 的宽度，但是外阴影会在左侧多出 5px 的区域，div 的位置不会因为挤压而改变。
+    *    方案三 box-shadow 属性示例：
+    *    /* 内外阴影 | x偏移量 | y偏移量 | 阴影模糊半径 | 阴影扩散半径 | 阴影颜色 | 任意数量的阴影，以逗号分隔 */
+    *    box-shadow: inset 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    * 3. 方案四：与 box-shadow 的外阴影类似，会对 div 产生一些影响。
+    * 4. 方案六，div 右侧会多出 5px 区域，并且挤压 div 向右移动 5px ；并且这只是实现方式，不推荐项目使用。
+  -->
+  <body>
+    <div class="border">border</div>
+    <div class="pseudo-element">pseudo-element</div>
+    <div class="box-shadow">box-shadow</div>
+    <div class="inset-box_shadow">inset-box_shadow</div>
+    <div class="drop-shadow">drop-shadow</div>
+    <div class="linear-gradient">linear-gradient</div>
+    <div class="scroll-bar"></div>
+  </body>
+</html>
