@@ -1,37 +1,47 @@
 /**
  * author: Myw.
- * date: Dec 09 10:30.
  * des: The encapsulation JS in working.
  */
-
 /**
- * date: Dec 09 10:30.
- * func: 获取页面上任意元素的任意属性的值（兼容 IE8）。
- * des: element 表示当前的元素，attr 表示需要获取的元素的属性值。
+ * * 获取页面上任意元素的任意属性的值（兼容 IE8）。
+ * @param { element } 当前元素。
+ * @param { attr } 需要获取元素的属性值。
  */
-function getStyle(element, attr) {
+const getStyle = (element, attr) => {
   return window.getComputedStyle
     ? window.getComputedStyle(element, null)[attr]
     : element.currentStyle[attr] || 0;
-}
-
+};
 /**
- * date: Dec 09 10:30.
- * func: 获取屏幕各种偏移量。
+ * * 判断任意数据类型。
+ * @param { type } 需要进行判断的数据类型。
+ */
+const getType = type => {
+  console.info(
+    type === undefined
+      ? "Undefined"
+      : type === null
+      ? "Null"
+      : type.constructor.name
+  );
+};
+/**
+ * * 获取屏幕各种偏移量。
+ * @func { getClientX, getClientY } 可视区域横纵坐标获取。
+ * @func { getScrollTop, getScrollLeft } 向上向左卷曲值的获取。
+ * @func { getPageX, getPageY } 向上向左卷曲值的获取。
+ * @param { evt } window.event 和事件参数对象e的兼容。
  */
 const evt = {
-  // 1. window.event 和事件参数对象e的兼容。
   getEvent: function(evt) {
     return window.event || evt;
   },
-  // 2. 可视区域横纵坐标获取。
   getClientX: function(evt) {
     return this.getEvent(evt).clientX;
   },
   getClientY: function(evt) {
     return this.getEvent(evt).clientY;
   },
-  // 3. 向上向左卷曲值的获取。
   getScrollTop: function() {
     return (
       window.pageYOffset ||
@@ -48,7 +58,6 @@ const evt = {
       0
     );
   },
-  // 4. 相对于页面的横纵坐标获取。
   getPageX: function() {
     return this.getEvent(evt).pageX
       ? this.getEvent(evt).pageX
@@ -59,15 +68,15 @@ const evt = {
       ? this.getEvent(evt).pageY
       : this.getClientY(evt) + this.getScrollTop();
   }
-}
-
+};
 /**
- * date: Dec 09 10:30.
- * func: 变速动画函数。
- * des: 适用于轮播图等非匀速动画效果。
+ * * 变速动画函数，适用于轮播图等非匀速动画效果。
+ * @param { element } 元素对应的 DOM 。
+ * @param { json } 包含元素很多属性的对象。
+ * @func { fn } 可选的回调函数。
  */
-function animateSpeedChange(element, json, fn) {
-  // 首先清理这个定时器，防止上一次定时器遗留。
+const animateSpeedChange = (element, json, fn) => {
+  // 首先清理这个定时器，防止上一次定时器遗留，造成加速动画。
   clearInterval(element.timeId);
   element.timeId = setInterval(function() {
     // 设置一个布尔值默认为  true，假设所有的属性及值已经改变完成。
