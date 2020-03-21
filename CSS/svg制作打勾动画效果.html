@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVG打勾动画效果</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      h2 {
+        margin-top: 40px;
+        font-size: 36px;
+        font-family: Helvetica;
+        color: #333;
+        opacity: 0;
+      }
+      input:checked ~ h2 {
+        animation: title .6s ease-in-out;
+        /* 延迟执行动画。 */
+        animation-delay: 1.75s;
+        /* 动画执行完毕，保持这个状态。 */
+        animation-fill-mode: forwards;
+      }
+      .circle {
+        stroke-dasharray: 1194;
+        stroke-dashoffset: 1194;
+      }
+      input:checked + svg .circle {
+        animation: circle .8s ease-out;
+        animation-fill-mode: forwards;
+      }
+      .tick {
+        stroke-dasharray: 350;
+        stroke-dashoffset: 350;
+      }
+      input:checked + svg .tick {
+        animation: tick 1s ease-in-out;
+        animation-delay: .95s;
+        animation-fill-mode: forwards;
+      }
+      @keyframes circle {
+        from {
+          stroke-dashoffset: 1194;
+        }
+        to {
+          stroke-dashoffset: 2388;
+        }
+      }
+      @keyframes tick {
+        from {
+          stroke-dashoffset: 350;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      @keyframes title {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <!-- 
+    * SVG 属性解释
+    * stroke-dasharray 可控制用来描边的点划线的图案范式。
+    * stroke-dashoffset 属性指定了 dash 模式到路径开始的距离。
+  -->
+  <body>
+    <input type="checkbox" />
+    <svg width="400" height="400">
+      <circle
+        class="circle"
+        fill="none"
+        cx="200"
+        cy="200"
+        r="190"
+        stroke="#68E534"
+        stroke-width="20"
+        stroke-linecap="round"
+      />
+      <polyline
+        class="tick"
+        fill="none"
+        points="88,214 173,284 304,138"
+        stroke="#68E534"
+        stroke-width="24"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+    <h2>Payment Success</h2>
+  </body>
+</html>
