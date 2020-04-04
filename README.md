@@ -1,3 +1,3 @@
-# Code-Notebook
+# code-notebook
 
-A test notebook record Codes.
+记录一些常用的代码。
