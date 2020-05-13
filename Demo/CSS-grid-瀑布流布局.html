@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid 瀑布流布局</title>
+    <style>
+      .masonry {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 5px;
+        grid-auto-rows: 10px;
+      }
+      .item {
+        grid-row-start: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="masonry">
+      <div class="item">
+        <img src="https://picsum.photos/360/460?random=1" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/520?random=2" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/420?random=3" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/420?random=4" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/480?random=5" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/500?random=6" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/500?random=7" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/400?random=8" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/440?random=9" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/420?random=10" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/500?random=11" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/460?random=12" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/480?random=13" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/440?random=14" />
+      </div>
+      <div class="item">
+        <img src="https://picsum.photos/360/420?random=15" />
+      </div>
+    </div>
+
+    <script>
+      let imgs = document.querySelectorAll("img");
+      Array.from(imgs).forEach((img, index) => {
+        let src = img.getAttribute("src");
+        let image = new Image();
+        image.src = src;
+        let width = 360;
+        image.onload = () => {
+          let w = image.width,
+            h = image.height;
+          let height = Math.round((h * width) / w);
+          img.src = src;
+          img.parentNode.parentNode.style = `width: ${width}px;`;
+          img.parentNode.style = `grid-row-end: span ${height / 10};`;
+        };
+      });
+    </script>
+  </body>
+</html>

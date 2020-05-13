@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>通讯录首字母吸顶效果</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      div {
+        width: 50vw;
+        height: 30vh;
+        border: 1px solid #717d85;
+        overflow-y: scroll;
+      }
+      dl {
+        margin: 0;
+        padding: 24px 0 0 0;
+      }
+      dt {
+        position: -webkit-sticky;
+        position: sticky;
+        top: -1px;
+        margin: 0;
+        padding: 2px 0 0 12px;
+        border-top: 1px solid #717d85;
+        border-bottom: 1px solid #989ea4;
+        color: #fff;
+        background-color: #b8c1c8;
+        font: bold 18px/21px Helvetica, Arial, sans-serif;
+      }
+      dd {
+        margin: 0;
+        padding: 0 0 0 12px;
+        white-space: nowrap;
+        font: bold 20px/45px Helvetica, Arial, sans-serif;
+      }
+      dd + dd {
+        border-top: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <!-- 
+    * dt 中设置了 top: -1px; 在 dt 距离顶部大于这个距离时，dt 表现为 position: static; 当小于等于这个距离时，dt 表现为 position: fixed;
+    -->
+  <body>
+    <div>
+      <dl>
+        <dt>A</dt>
+        <dd>Alice</dd>
+        <dd>Alice</dd>
+        <dd>Alice</dd>
+        <dd>Alice</dd>
+        <dd>Alice</dd>
+      </dl>
+      <dl>
+        <dt>B</dt>
+        <dd>Black</dd>
+        <dd>Black</dd>
+        <dd>Black</dd>
+        <dd>Black</dd>
+        <dd>Black</dd>
+      </dl>
+      <dl>
+        <dt>C</dt>
+        <dd>Cris</dd>
+        <dd>Cris</dd>
+        <dd>Cris</dd>
+        <dd>Cris</dd>
+        <dd>Cris</dd>
+      </dl>
+      <dl>
+        <dt>D</dt>
+        <dd>DaMing</dd>
+        <dd>DaMing</dd>
+        <dd>DaMing</dd>
+        <dd>DaMing</dd>
+        <dd>DaMing</dd>
+      </dl>
+      <dl>
+        <dt>F</dt>
+        <dd>Frank</dd>
+        <dd>Frank</dd>
+        <dd>Frank</dd>
+        <dd>Frank</dd>
+        <dd>Frank</dd>
+      </dl>
+    </div>
+  </body>
+</html>
