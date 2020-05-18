@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>聚光灯动画</title>
+    <style>
+      html {
+        font-size: 15px;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        min-height: 100vh;
+        background-color: #111;
+      }
+      h1, h2 {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        font-size: 8rem;
+        font-family: Helvetica;
+        color: #444;
+        letter-spacing: -0.3rem;
+      }
+      h1::after,
+      h2::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+        clip-path: ellipse(100px 100px at 0% 50%);
+        background-image: linear-gradient(90deg, red, orange, yellow, green, lightgreen, skyblue, purple);
+        background-size: 100%;
+        background-position: center center;
+        -webkit-background-clip: text;
+        /* 文字镂空的两条重要属性：background-clip、color: transparent */
+        background-clip: text;
+        color: transparent;
+        content: attr(data-text);
+      }
+      h1::after {
+        animation: spotlight-smooth 6s infinite;
+      }
+      h2::after {
+        animation: spotlight-breakpoint 6s infinite;
+      }
+      @keyframes spotlight-smooth {
+        0% {
+          -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+          clip-path: ellipse(100px 100px at 0% 50%);
+        }
+        50% {
+          -webkit-clip-path: ellipse(100px 100px at 100% 50%);
+          clip-path: ellipse(100px 100px at 100% 50%);
+        }
+        100% {
+          -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+          clip-path: ellipse(100px 100px at 0% 50%);
+        }
+      }
+      @keyframes spotlight-breakpoint {
+        0% {
+          -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+          clip-path: ellipse(100px 100px at 0% 50%);
+        }
+        20% {
+          -webkit-clip-path: ellipse(100px 100px at 33% 50%);
+          clip-path: ellipse(100px 100px at 33% 50%);
+        }
+        40% {
+          -webkit-clip-path: ellipse(100px 100px at 66% 50%);
+          clip-path: ellipse(100px 100px at 66% 50%);
+        }
+        50% {
+          -webkit-clip-path: ellipse(100px 100px at 100% 50%);
+          clip-path: ellipse(100px 100px at 100% 50%);
+        }
+        60% {
+          -webkit-clip-path: ellipse(100px 100px at 66% 50%);
+          clip-path: ellipse(100px 100px at 66% 50%);
+        }
+        80% {
+          -webkit-clip-path: ellipse(100px 100px at 33% 50%);
+          clip-path: ellipse(100px 100px at 33% 50%);
+        }
+        100% {
+          -webkit-clip-path: ellipse(100px 100px at 0% 50%);
+          clip-path: ellipse(100px 100px at 0% 50%);
+        }
+      }
+    </style>
+  </head>
+  <!-- 
+    * 1. 使用伪元素生成和标签文字相同（大小：top、left 置 0）的内容（attr 获取）；
+    * 2. background-clip 实现文字镂空，background-image 渐变底色；
+    * 3. clip-path 实现一条剪切路径，动画照亮这个路径。
+    -->
+  <body>
+    <h1 data-text="It's a highlight animation!">It's a highlight animation!</h1>
+    <h2 data-text="It's a highlight animation!">It's a highlight animation!</h2>
+  </body>
+</html>
