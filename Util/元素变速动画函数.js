@@ -1,79 +1,8 @@
 /**
- * author: Myw.
- * des: The encapsulation JS in working.
- */
-/**
- * * 获取页面上任意元素的任意属性的值（兼容 IE8）。
- * @param { element } 当前元素。
- * @param { attr } 需要获取元素的属性值。
- */
-const getStyle = (element, attr) => {
-  return window.getComputedStyle
-    ? window.getComputedStyle(element, null)[attr]
-    : element.currentStyle[attr] || 0;
-};
-/**
- * * 判断任意数据类型。
- * @param { type } 需要进行判断的数据类型。
- */
-const getType = type => {
-  console.info(
-    type === undefined
-      ? "Undefined"
-      : type === null
-      ? "Null"
-      : type.constructor.name
-  );
-};
-/**
- * * 获取屏幕各种偏移量。
- * @func { getClientX, getClientY } 可视区域横纵坐标获取。
- * @func { getScrollTop, getScrollLeft } 向上向左卷曲值的获取。
- * @func { getPageX, getPageY } 向上向左卷曲值的获取。
- * @param { evt } window.event 和事件参数对象e的兼容。
- */
-const evt = {
-  getEvent: function(evt) {
-    return window.event || evt;
-  },
-  getClientX: function(evt) {
-    return this.getEvent(evt).clientX;
-  },
-  getClientY: function(evt) {
-    return this.getEvent(evt).clientY;
-  },
-  getScrollTop: function() {
-    return (
-      window.pageYOffset ||
-      document.body.scrollTop ||
-      document.documentElement.scrollTop ||
-      0
-    );
-  },
-  getScrollLeft: function() {
-    return (
-      window.pageXOffset ||
-      document.body.scrollLeft ||
-      document.documentElement.scrollLeft ||
-      0
-    );
-  },
-  getPageX: function() {
-    return this.getEvent(evt).pageX
-      ? this.getEvent(evt).pageX
-      : this.getClientX(evt) + this.getScrollLeft();
-  },
-  getPageY: function() {
-    return this.getEvent(evt).pageY
-      ? this.getEvent(evt).pageY
-      : this.getClientY(evt) + this.getScrollTop();
-  }
-};
-/**
  * * 变速动画函数，适用于轮播图等非匀速动画效果。
- * @param { element } 元素对应的 DOM 。
- * @param { json } 包含元素很多属性的对象。
- * @func { fn } 可选的回调函数。
+ * @param { Document.querySelector('.class || #id') } element 元素对应的 DOM 。
+ * @param { Object } json 包含元素很多属性的对象。
+ * @func fn 可选的回调函数。
  */
 const animateSpeedChange = (element, json, fn) => {
   // 首先清理这个定时器，防止上一次定时器遗留，造成加速动画。
