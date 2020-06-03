@@ -19,11 +19,9 @@
         height: 100%;
         width: 100%;
       }
-
       .amap-info-sharp {
         display: none;
       }
-
       .amap-info-content {
         width: 237px;
         height: 46px;
@@ -35,7 +33,6 @@
         background-color: #1779fe;
         opacity: 0.8;
       }
-
       .map-tool_button {
         position: absolute;
         top: 5%;
@@ -46,7 +43,6 @@
   <body>
     <div id="container"></div>
     <button class="map-tool_button">高亮行政区</button>
-
     <!-- 引入高德地图 JS API -->
     <script
       type="text/javascript"
@@ -54,30 +50,36 @@
     ></script>
     <!--引入UI组件库（1.0版本） -->
     <script src="//webapi.amap.com/ui/1.0/main.js"></script>
-    <script type="text/javascript">
+    <script>
       /**
-       * 实例化地图以及生命周期。
+       * * 实例化地图以及生命周期。
        */
       let map = new AMap.Map("container", {
-        resizeEnable: true, // 开启地图缩放功能。
-        expandZoomRange: true, // 开启 PC 端地图缩放最大范围。
-        center: [106.55, 29.57], // 地图中心点。
-        zoom: 9, // 地图初始缩放级别。
-        zooms: [8, 20], // 设置地图缩放范围。
-        mapStyle: "amap://styles/blue" // 设置地图的 UI 显示样式。
+        // 开启地图缩放功能。
+        resizeEnable: true,
+        // 开启 PC 端地图缩放最大范围。
+        expandZoomRange: true,
+        // 地图中心点。
+        center: [106.55, 29.57],
+        // 地图初始缩放级别。
+        zoom: 9,
+        // 设置地图缩放范围。
+        zooms: [8, 20],
+        // 设置地图的 UI 显示样式。
+        mapStyle: "amap://styles/blue"
       });
       // 地图加载完毕之后触发 complete 事件。
-      map.on("complete", function() {
+      map.on("complete", function () {
         console.info("地图加载完毕！");
       });
       // 点击高亮显示行政区。
       document
         .querySelector(".map-tool_button")
-        .addEventListener("click", function() {
-          // map.destroy(); // 销毁地图实例
+        .addEventListener("click", function () {
+          // 销毁地图实例
+          // map.destroy();
           showTheCityOnMap();
         });
-
       // 地图所需标点的数据集合。
       let projectData = [
         {
@@ -162,27 +164,22 @@
           return value;
         });
       };
-
       /**
-       * 信息窗体与标点功能。
-       *
-       * @parameter:
-       * infoWindow --> 实例化的信息窗体对象。
-       * points --> 所有项目的经纬度坐标数组集合。
-       * l --> 经纬度数组的长度。
-       * marker --> 实例化的标点对象。
-       *        --> position: 单个点的坐标。
-       *        --> content: 单个点的样式。
-       *
-       * @Func:
-       * handleOverTheMarker --> 鼠标移入 Marker：打开信息窗体并传递数据。
-       * handleSetMarkerAndInfoWindow --> 标点以及信息窗体设置。
+       * * 信息窗体与标点功能。
+       * @func handleOverTheMarker 鼠标移入 Marker 打开信息窗体并传递数据。
+       * @func handleSetMarkerAndInfoWindow 标点以及信息窗体设置。
+       * @param infoWindow 实例化的信息窗体对象。
+       * @param points 所有项目的经纬度坐标数组集合。
+       * @param l 经纬度数组的长度。
+       * @param marker 实例化的标点对象。
+       * @param position 单个点的坐标。
+       * @param content 单个点的样式。
        */
       const infoWindow = new AMap.InfoWindow({
           offset: new AMap.Pixel(15, -30)
         }),
         points = [];
-      const handleOverTheMarker = e => {
+      const handleOverTheMarker = (e) => {
         // 向信息窗体中传入数据。
         infoWindow.setContent(e.target.content);
         // 根据经纬度打开信息窗体。
@@ -201,36 +198,31 @@
           points.push(point);
           let marker = new AMap.Marker({
             position: points[i],
-            content: `<img src="./static/image/item-marker-1x.png">`,
+            content: `<div style="height: 20px; width: 20px; border-radius: 50%; background-color: lightgreen;"></div>`,
             map: map
           });
           marker.content = `${projectData[i].name}`;
           marker.on("mouseover", handleOverTheMarker);
           marker.emit("click", { target: marker });
         }
-        // map.setFitView();
+        map.setFitView();
       };
       // 调用执行实例化标点以及信息窗体的函数。
       handleSetMarkerAndInfoWindow();
-
       /**
-       * 高亮显示行政区功能。
-       *
-       * @parameter:
-       * feature --> 用来接收重庆市下的每一个区域详细信息的对象容器。
-       * currentAreaNode --> 当前聚焦的区域。
-       * l --> 经纬度数组的长度。
-       * marker --> 实例化的标点对象。
-       *        --> position: 单个点的坐标。
-       *        --> content: 单个点的样式。
-       *
-       * @Func:
-       * showTheCityOnMap --> 高亮显示行政区功能的包装函数。
-       * loadAreaNode --> 加载行政区域。
-       * setMap --> 重置地图的 center（中心点） 和 zoom（缩放级别）。
-       * renderAreaPolygons --> 绘制被点击区域的边界功能函数，包括整个重庆市以及其下的行政区域。
-       * switch2AreaNode --> 切换行政区域。
-       * refreshAreaNode --> 切换之后重新加载数据的工具函数。
+       * * 高亮显示行政区功能。
+       * @func showTheCityOnMap --> 高亮显示行政区功能的包装函数。
+       * @func loadAreaNode --> 加载行政区域。
+       * @func setMap --> 重置地图的 center（中心点） 和 zoom（缩放级别）。
+       * @func renderAreaPolygons --> 绘制被点击区域的边界功能函数，包括整个重庆市以及其下的行政区域。
+       * @func switch2AreaNode --> 切换行政区域。
+       * @func refreshAreaNode --> 切换之后重新加载数据的工具函数。
+       * @param feature 用来接收重庆市下的每一个区域详细信息的对象容器。
+       * @param currentAreaNode 当前聚焦的区域。
+       * @param l 经纬度数组的长度。
+       * @param marker 实例化的标点对象。
+       * @param position 单个点的坐标。
+       * @param content 单个点的样式。
        */
       const showTheCityOnMap = () => {
         // 高亮显示行政区之前首先清除地图中的项目标点以及信息窗体。
@@ -238,7 +230,10 @@
         let feature = "";
         let _this = this;
         let currentAreaNode = null;
-        AMapUI.load(["ui/geo/DistrictExplorer"], function(DistrictExplorer, $) {
+        AMapUI.load(["ui/geo/DistrictExplorer"], function (
+          DistrictExplorer,
+          $
+        ) {
           // 创建一个实例。
           let districtExplorer = (window.districtExplorer = new DistrictExplorer(
             {
@@ -246,9 +241,8 @@
               map: map
             }
           ));
-
           const loadAreaNode = (adcode, callback) => {
-            districtExplorer.loadAreaNode(adcode, function(error, areaNode) {
+            districtExplorer.loadAreaNode(adcode, function (error, areaNode) {
               if (error) {
                 if (callback) {
                   callback(error);
@@ -261,9 +255,8 @@
               }
             });
           };
-
           // feature 内部被点击。
-          districtExplorer.on("featureClick", function(e, feature) {
+          districtExplorer.on("featureClick", function (e, feature) {
             let props = feature.properties;
             _this.opts = {
               subdistrict: 0,
@@ -277,20 +270,17 @@
               setMap(props.center);
             }
           });
-
-          const setMap = center => {
+          const setMap = (center) => {
             map.setCenter(center);
             map.setZoom(10);
           };
-
           // 区域外部被点击，只要是重庆市内的区域，就跳转到相应的区域。
-          districtExplorer.on("outsideClick", function(e) {
+          districtExplorer.on("outsideClick", function (e) {
             districtExplorer.locatePosition(e.originalEvent.lnglat);
             switch2AreaNode(500000);
           });
-
           // 绘制某个被点击区域的边界。
-          const renderAreaPolygons = areaNode => {
+          const renderAreaPolygons = (areaNode) => {
             // 首先清除上一个被点点击区域的高亮显示效果。
             districtExplorer.clearFeaturePolygons();
             if (areaNode.adcode == 500000) {
@@ -304,7 +294,6 @@
                 fillOpacity: 0 // 填充透明度
               });
             }
-
             // 绘制父区域。
             districtExplorer.renderParentFeature(areaNode, {
               cursor: "default",
@@ -316,10 +305,9 @@
               fillOpacity: 0.1 //填充透明度
             });
           };
-
           // 切换区域。
           const switch2AreaNode = (adcode, callback) => {
-            loadAreaNode(adcode, function(error, areaNode) {
+            loadAreaNode(adcode, function (error, areaNode) {
               if (error) {
                 if (callback) {
                   callback(error);
@@ -333,13 +321,11 @@
               }
             });
           };
-
           // 切换区域后刷新显示内容。
-          const refreshAreaNode = areaNode => {
+          const refreshAreaNode = (areaNode) => {
             districtExplorer.setHoverFeature(null);
             renderAreaPolygons(areaNode);
           };
-
           switch2AreaNode(500000); // 重庆市。
         });
       };
