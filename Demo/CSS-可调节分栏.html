@@ -38,7 +38,8 @@
         width: 200px;
         height: 100%;
       }
-      .resize-bar:hover ~ .resize-line, .resize-bar:active ~ .resize-line {
+      .resize-bar:hover ~ .resize-line,
+      .resize-bar:active ~ .resize-line {
         border-left: 1px dashed #09f;
       }
       .resize-line {
@@ -62,6 +63,10 @@
       }
     </style>
   </head>
+  <!-- 
+    * 允许控制一个元素的可调整大小性 - resize: none 元素不能被用户缩放 | both 允许在水平和垂直方向调整 | horizontal 水平方向可调整 | vertica 垂直方向可调整；
+    * 水平方向左侧元素 float: left; 其中子元素第一个元素调整滚动条来撑开左侧元素。
+    -->
   <body>
     <div class="stretching-column">
       <div class="left">
