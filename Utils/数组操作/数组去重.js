@@ -4,14 +4,6 @@
  * @param { Object } hash 保存数组中元素的对象。
  * 
  */
-const arrDeduplication = arr => {
-  let hash = {};
-  arr = arr.reduce((item, next) => {
-    hash[next.name] ? '' : (hash[next.name] = true && item.push(next));
-    return item;
-  }, []);
-  return arr;
-};
 var testArr = [
   {
     name: "ZYTX",
@@ -34,4 +26,12 @@ var testArr = [
     gender: "AAAAAA.doc"
   }
 ];
+const arrDeduplication = arr => {
+  let hash = {};
+  arr = arr.reduce((item, next) => {
+    hash[next.name] ? '' : (hash[next.name] = true && item.push(next));
+    return item;
+  }, []);
+  return arr;
+};
 console.info(arrDeduplication(testArr));
