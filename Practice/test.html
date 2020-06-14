@@ -4,59 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-      #container {
-        width: 100%;
-        height: 200px;
-        line-height: 200px;
-        text-align: center;
-        color: #fff;
-        background-color: #444;
-        font-size: 30px;
-      }
-    </style>
   </head>
   <body>
-    <div id="container"></div>
-    <button id="button">cancel</button>
+    <button id="newWindowButton">打开新窗口</button>
+
     <script>
-      var count = 1,
-        container = document.querySelector("#container");
-      function getUserAction() {
-        container.innerHTML = count++;
-        console.info(this);
-      }
-      container.onmousemove = getUserAction;
-      // function debounce(func, wait, immediate) {
-      //   var timeout, result;
-      //   var debounced = function() {
-      //     var context = this;
-      //     var args = arguments;
-      //     if(timeout) clearTimeout(timeout);
-      //     if(immediate) {
-      //       var callNow = !timeout;
-      //       timeout = setTimeout(function() {
-      //         timeout = null;
-      //       }, wait);
-      //       if(callNow) result = func.apply(context, args);
-      //     } else {
-      //       timeout = setTimeout(function() {
-      //         func.apply(context, args);
-      //       }, wait);
-      //     }
-      //     return result;
-      //   };
-      //   debounced.cancel = function() {
-      //     clearTimeout(timeout);
-      //     timeout = null;
-      //   }
-      //   return debounced;
-      // }
-      // var setUserAction = debounce(getUserAction, 10000, true);
-      // container.onmousemove = setUserAction;
-      // document.querySelector("#button").addEventListener("click", function() {
-      //   setUserAction.cancel();
-      // });
+      const openWindow = (url, windowName, width, height) => {
+        var x = parseInt(screen.width / 2.0) - width / 2.0;
+        var y = parseInt(screen.height / 2.0) - height / 2.0;
+        var isMSIE = navigator.appName == "Microsoft Internet Explorer";
+        if (isMSIE) {
+          var p = "resizable=1,location=no,scrollbars=no,width=";
+          p = p + width;
+          p = p + ",height=";
+          p = p + height;
+          p = p + ",left=";
+          p = p + x;
+          p = p + ",top=";
+          p = p + y;
+          window.open(url, windowName, p);
+        } else {
+          var win = window.open(
+            url,
+            "ZyiisPopup",
+            "top=" + y + ",left=" + x + ",scrollbars=" + scrollbars + ",dialog=yes,modal=yes,width=" + width + ",height=" + height + ",resizable=no"
+          );
+          eval("try { win.resizeTo(width, height); } catch(e) { }");
+          win.focus();
+        }
+      };
+      document.querySelector('#newWindowButton').addEventListener('click', () => {
+        openWindow('https://www.baidu.com', '百度', '1920', '1007');
+      });
     </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 /**
- * * 判断任意数据类型。
+ * ? 判断任意数据类型。
  * @param { variable } type 需要进行判断的数据类型。
  */
 const getType = type => {

@@ -1,7 +1,7 @@
 /**
  * ? 元素全屏/推出全屏。
  * @func launchFullscreen 元素全屏化；
- * @func exitFullscreen 推出全屏；
+ * @func exitFullscreen 退出全屏；
  * @param { DOM } element DOM 节点对象。
  */
 const launchFullscreen = element => {
