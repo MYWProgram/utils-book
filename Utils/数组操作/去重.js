@@ -1,4 +1,14 @@
 /**
+ * ? 普通数组去重；
+ * @param { Array } arr 测试数组。 
+ */
+const deWeight = arr => {
+  return arr.filter((item, index, self) => self.indexOf(item) === index);
+}
+let arr = [1, 1, 3, 4, 5, 3, 4];
+console.info(deWeight(arr));
+
+/**
  * ? JSON Array 去重；
  * @param { Array } arr 需要去重的目标数组；
  * @param { String } flag 去重依据 key；
