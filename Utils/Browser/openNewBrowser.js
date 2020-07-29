@@ -5,7 +5,7 @@
  * @param { Number } width 新开浏览器的宽度。
  * @param { Number } height 新开浏览器的高度。
  */
-const openWindow = (url, windowName, width, height) => {
+const openNewBrowser = (url, windowName, width, height) => {
   var x = parseInt(screen.width / 2.0) - width / 2.0;
   var y = parseInt(screen.height / 2.0) - height / 2.0;
   var isMSIE = navigator.appName == 'Microsoft Internet Explorer';

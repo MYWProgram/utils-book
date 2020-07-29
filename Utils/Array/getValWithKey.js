@@ -5,11 +5,7 @@
  * @param { String } key 需要进行判断的键名。
  * @return { JSON Array } 过滤后的 JSON Array.
  */
-const filterValSet = (targetObj, targetArr, key) => {
-  let s = new Set(targetArr);
-  return targetObj.filter(item => s.has(item[key]));
-};
-const filterVal = (targetObj, targetArr, key) => {
+const getValWithKey = (targetObj, targetArr, key) => {
   let s = new Set(targetArr);
   // * 使用 Set 结构的 has()
   return targetObj.filter(item => s.has(item[key]));
@@ -41,4 +37,4 @@ let object = [
     }
   ],
   arr = [1, 3, 5];
-console.info(filterVal(object, arr, 'key'));
+console.info(getValWithKey(object, arr, 'key'));

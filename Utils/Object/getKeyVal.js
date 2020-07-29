@@ -4,10 +4,10 @@
  * @param {*} arr 存放需要取出键值对的键值数组。
  * @return { Object } 所需键值对存放的对象。
  */
-let pickKeyVal = (obj, arr) => arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur]), acc), {});
+let getKeyVal = (obj, arr) => arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur]), acc), {});
 let person = {
   name: 'Mike',
   age: 24,
   lover: 'Mary'
 };
-console.info(pickKeyVal(person, ['name', 'age']));
+console.info(getKeyVal(person, ['name', 'age']));
