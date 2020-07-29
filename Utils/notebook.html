@@ -4,37 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style></style>
   </head>
   <body>
-    <script>
-      const cookieSet = (key, value, expire) => {
-        const d = new Date();
-        d.setDate(d.getDate() + expire);
-        if (typeof value === 'object') value = JSON.stringify(value);
-        document.cookie = `${key}=${value};expires=${d.toUTCString()}`;
-      };
-      const cookieGet = key => {
-        const cookieStr = unescape(document.cookie);
-        const arr = cookieStr.split('; ');
-        let cookieValue = '';
-        for (let i = 0; i < arr.length; i++) {
-          const temp = arr[i].split('=');
-          if (temp[0] === key) {
-            cookieValue = temp[1];
-            break;
-          }
-        }
-        return cookieValue;
-      };
-      const cookieRemove = key => {
-        const d = new Date();
-        d.setDate(d.getDate() - 1);
-        document.cookie = `${key}=;expires=${d.toUTCString()}`;
-      };
-
-      cookieSet('person', { name: 'Mike' }, 100);
-      console.info(cookieGet('person'));
-      cookieRemove('person');
-    </script>
+    <script></script>
   </body>
 </html>
