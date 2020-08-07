@@ -4,7 +4,8 @@
  * @param {*} arr 存放需要取出键值对的键值数组。
  * @return { Object } 所需键值对存放的对象。
  */
-let getKeyVal = (obj, arr) => arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur]), acc), {});
+export const getKeyVal = (obj, arr) => arr.reduce((acc, cur) => (cur in obj && (acc[cur] = obj[cur]), acc), {});
+
 let person = {
   name: 'Mike',
   age: 24,

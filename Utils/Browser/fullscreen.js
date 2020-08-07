@@ -1,10 +1,8 @@
 /**
- * ? 元素全屏/退出全屏。
- * @func launchFullscreen 元素全屏化。
- * @func exitFullscreen 退出全屏。
+ * ? 元素进入全屏。
  * @param { DOM } element DOM 节点对象。
  */
-const launchFullscreen = element => {
+export const launchFullscreen = element => {
   if (element.requestFullscreen) {
     element.requestFullscreen();
   } else if (element.mozRequestFullScreen) {
@@ -15,7 +13,10 @@ const launchFullscreen = element => {
     element.webkitRequestFullScreen();
   }
 };
-const exitFullscreen = () => {
+/**
+ * ? 元素退出全屏。
+ */
+export const exitFullscreen = () => {
   if (document.exitFullscreen) {
     document.exitFullscreen();
   } else if (document.msExitFullscreen) {

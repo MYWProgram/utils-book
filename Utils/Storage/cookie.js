@@ -4,7 +4,7 @@
  * @param {*} value 目标值。
  * @param {*} expire 时效，单位天。
  */
-const cookieSet = (key, value, expire) => {
+export const cookieSet = (key, value, expire) => {
   const d = new Date();
   d.setDate(d.getDate() + expire);
   if (typeof value === 'object') value = JSON.stringify(value);
@@ -14,7 +14,7 @@ const cookieSet = (key, value, expire) => {
  * ? 从 cookie 中获取指定键名的值。
  * @param { String } key 目标键名。
  */
-const cookieGet = key => {
+export const cookieGet = key => {
   const cookieStr = unescape(document.cookie);
   const arr = cookieStr.split('; ');
   let cookieValue = '';
@@ -31,12 +31,12 @@ const cookieGet = key => {
  * ? 从 cookie 中删除指定键名的目标。
  * @param { String } key 目标键名。
  */
-const cookieRemove = key => {
+export const cookieRemove = key => {
   const d = new Date();
   d.setDate(d.getDate() - 1);
   document.cookie = `${key}=;expires=${d.toUTCString()}`;
 };
 
-cookieSet('person', { name: 'Mike' }, 100);
-console.info(cookieGet('person'));
-cookieRemove('person');
+// cookieSet('person', { name: 'Mike' }, 100);
+// console.info(cookieGet('person'));
+// cookieRemove('person');

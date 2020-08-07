@@ -4,7 +4,7 @@
  * @param { Number } divisor 转换时间戳的基准。
  * @return { String | Number } 时间戳。
  */
-const date2Timestamp = (date, divisor = 1000) => {
+export const date2Timestamp = (date, divisor = 1000) => {
   if (typeof date === 'undefined') return;
   if (typeof date == 'number') return Math.floor(date / divisor);
   else if (typeof date == 'string') {
@@ -17,4 +17,4 @@ const date2Timestamp = (date, divisor = 1000) => {
   else if (Date.prototype.isPrototypeOf(date)) return Math.floor(+date / divisor);
 };
 
-console.info(date2Timestamp(new Date()));
+// console.info(date2Timestamp(new Date()));

@@ -12,7 +12,7 @@ export const formatNumber = n => {
  * @param { Object } date 时间对象。
  * @return { String } 'x月x日'格式字符串。
  */
-const formatTime = date => {
+export const formatTime = date => {
   if (!!date) {
     if (!(date instanceof Date)) date = new Date(date);
     let month = date.getMonth() + 1;
@@ -27,7 +27,7 @@ const formatTime = date => {
  * @param { Object } date 时间对象。
  * @return { String }  '年-月-日'格式字符串。
  */
-const formatDay = date => {
+export const formatDay = date => {
   if (!!date) {
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
@@ -42,7 +42,7 @@ const formatDay = date => {
  * @param { Object } date 时间对象。
  * @return { String } 周几。
  */
-const formatWeek = date => {
+export const formatWeek = date => {
   if (!!date) {
     let day = date.getDay();
     switch (day) {
@@ -77,7 +77,7 @@ const formatWeek = date => {
  * @param { Object } date 时间对象。
  * @return { String } '时:分'格式字符串。
  */
-const formatHour = date => {
+export const formatHour = date => {
   if (!!date) {
     var hour = new Date(date).getHours();
     var minute = new Date(date).getMinutes();

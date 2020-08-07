@@ -4,7 +4,7 @@
  * @param { Object } json 包含元素很多属性的对象。
  * @param { Function } fn 可选的回调函数。
  */
-const animationSpeedChange = (element, json, fn) => {
+export const animationSpeedChange = (element, json, fn) => {
   // * 首先清理这个定时器，防止上一次定时器遗留，造成加速动画。
   clearInterval(element.timeId);
   element.timeId = setInterval(() => {
